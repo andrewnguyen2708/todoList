@@ -3,16 +3,15 @@ import { Col, Row, Input, Button, Select, Tag } from "antd";
 import Todo from "../Todo";
 import { useDispatch, useSelector } from "react-redux";
 import { remainerListSelector } from "../../redux/selectors";
-import { addToDo } from "../../redux/actions";
+// import { addToDo } from "../../redux/actions";
 import { v4 as uuidv4 } from "uuid";
+import todoListSlice from "./todoListSlice";
 
 export default function TodoList() {
   const [name, setName] = useState("");
-  const [prioriry, setPrioriry] = useState("");
+  const [prioriry, setPrioriry] = useState("Medium");
   const dispatch = useDispatch();
   const remainerList = useSelector(remainerListSelector);
-
-  console.log(remainerList);
 
   const handleChangeName = (e) => {
     setName(e.target.value);
@@ -23,9 +22,16 @@ export default function TodoList() {
   };
 
   const handleAddToDo = () => {
-    dispatch(addToDo({ id: uuidv4(), name, prioriry, completed: false }));
+    dispatch(
+      todoListSlice.actions.addTodo({
+        id: uuidv4(),
+        name,
+        prioriry,
+        completed: false,
+      })
+    );
     setName("");
-    setPrioriry("");
+    setPrioriry("Medium");
   };
 
   return (

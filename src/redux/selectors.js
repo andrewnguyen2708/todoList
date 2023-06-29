@@ -1,22 +1,22 @@
-import { createSelector } from "reselect";
+import { createSelector } from "@reduxjs/toolkit";
 
 const filterSearchSelector = (state) => state.filters.search;
-const filterPriorirySelector = (state) => state.filters.prioriry;
-const filterCompletedSelector = (state) => state.filters.completed;
+const filterPriorirySelector = (state) => state.filters.prioriries;
+const filterCompletedSelector = (state) => state.filters.completedStatus;
 
-const toDoListSelector = (state) => state.toDoList;
+const toDoListSelector = (state) => state.todoList;
 const remainerListSelector = createSelector(
   filterSearchSelector,
   filterPriorirySelector,
   filterCompletedSelector,
   toDoListSelector,
-  (search, prioriry, completed, list) => {
+  (search, prioriries, completedStatus, list = []) => {
     return list.filter(
       (item) =>
         item.name.includes(search) &&
-        (completed === "All" ||
-          completed === (item.completed ? "Completed" : "Todo")) &&
-        prioriry.includes(item.prioriry)
+        (completedStatus === "All" ||
+          completedStatus === (item.completed ? "Completed" : "Todo")) &&
+        prioriries.includes(item.prioriry)
     );
   }
 );

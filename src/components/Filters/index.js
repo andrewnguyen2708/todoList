@@ -5,32 +5,30 @@ import {
   filterPriorirySelector,
   filterSearchSelector,
 } from "../../redux/selectors";
-import {
-  filterCompleted,
-  filterPrioriry,
-  filterSearch,
-} from "../../redux/actions";
+import filtersSlice from "./filtersSlice";
 
 const { Search } = Input;
 
 export default function Filters() {
   const dispatch = useDispatch();
 
+  const { searchFilter, prioririesFilter, completedStatusFilter } =
+    filtersSlice.actions;
+
   const search = useSelector(filterSearchSelector);
   const prioriry = useSelector(filterPriorirySelector);
   const completed = useSelector(filterCompletedSelector);
 
   const handleChangeFilterSearch = (e) => {
-    dispatch(filterSearch(e.target.value));
+    dispatch(searchFilter(e.target.value));
   };
 
   const handleChangeFilterPrioriry = (value) => {
-    dispatch(filterPrioriry(value));
+    dispatch(prioririesFilter(value));
   };
 
   const handleChangeFilterCompleted = (e) => {
-    console.log(e.target.value);
-    dispatch(filterCompleted(e.target.value));
+    dispatch(completedStatusFilter(e.target.value));
   };
 
   return (
