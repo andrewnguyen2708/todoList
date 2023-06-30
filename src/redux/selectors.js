@@ -4,7 +4,7 @@ const filterSearchSelector = (state) => state.filters.search;
 const filterPriorirySelector = (state) => state.filters.prioriries;
 const filterCompletedSelector = (state) => state.filters.completedStatus;
 
-const toDoListSelector = (state) => state.todoList;
+const toDoListSelector = (state) => state.todoList.todos;
 const remainerListSelector = createSelector(
   filterSearchSelector,
   filterPriorirySelector,
